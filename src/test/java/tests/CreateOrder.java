@@ -47,20 +47,21 @@ public class CreateOrder {
     public static Object[][] getDataForOrder() {
         return new Object[][] {
                 {true,"Андрей","Андреев","Воронеж", "Черкизовская","88005553535","01.11.2022","сутки", true, false, "Test комментарий"},
-                {true,"Сергей","Сергеев","Москва", "ВДНХ","88005553535","01.11.2022","сутки", false, false, ""},
+                {false,"Сергей","Сергеев","Москва", "ВДНХ","88005553535","01.11.2022","сутки", false, false, ""},
         };
     }
     @Before
     public void startUp() {
         WebDriverManager.firefoxdriver().setup();
-    }
-    @Test
-    public void createOrderTest() {
         FirefoxOptions options = new FirefoxOptions();
         options.addArguments("--no-sandbox", "--headless", "--disable-dev-shm-usage");
         driver = new FirefoxDriver(options);
         driver.get("https://qa-scooter.praktikum-services.ru/");
         driver.findElement(By.className("App_CookieButton__3cvqF")).click();
+
+    }
+    @Test
+    public void createOrderTest() {
         MainPage mainPage = new MainPage(driver);
         OrderPage orderPage = new OrderPage(driver);
         if(isOrderFromHeader)
